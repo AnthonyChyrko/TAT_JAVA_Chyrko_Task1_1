@@ -1,4 +1,4 @@
-package tasks.task6;
+package tasks.task2;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,34 +50,19 @@ class Tools {
 		}		
 		return result;		
 	}
-	
-	 double performCalc(double max, double min) {
-			double result = max + min;
-		return result;
-	}	
-	 
-	 double max(String[] args){		
-		 double[] doubleArgs = convertStringToDouble(args);
-		 double num1 = doubleArgs[0];
-		 double num2 = doubleArgs[1];
-		 double num3 = doubleArgs[2];
-			double max = num1 > num2 ? num1 : num2;
-			double result = num3 > max ? num3 : max;
-			return result;
-			
-		}
+
+	double performCalc(String[] args) {
+		double[] tmp = convertStringToDouble(args);				
+		double a = tmp[0];
+		double b = tmp[1];
+		double c = tmp[2];
+		Double result;
+		result = (b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2*a-Math.pow(a, 3)*c+1/(Math.pow(b, 2));
+		return result;	
+	}
+
+	 void printResult(double result) {		
+		System.out.printf("Result is %.3f", result);
 		
-		double min(String[] args){	
-			double[] doubleArgs = convertStringToDouble(args);
-			double num1 = doubleArgs[0];
-			double num2 = doubleArgs[1];
-			double num3 = doubleArgs[2];
-			double min = num1 < num2 ? num1 : num2;
-			double result = num3 < min ? num3 : min;
-			return result;			
-		}
-	
-		 void printResult(double result, String triangleParam) {
-			 System.out.printf("" + triangleParam + " is %.3f \n", result );
-		}
+	}
 }

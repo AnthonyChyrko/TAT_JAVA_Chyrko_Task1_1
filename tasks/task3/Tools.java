@@ -1,4 +1,4 @@
-package tasks.task6;
+package tasks.task3;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,8 +18,8 @@ class Tools {
 	
 	private boolean checkCountArgs(String[] args){
 		boolean check = true;
-		if(args.length!=3){
-			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
+		if(args.length!=2){
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_2_NUM);			
 			System.exit(1);
 		}
 		return check;
@@ -51,33 +51,13 @@ class Tools {
 		return result;		
 	}
 	
-	 double performCalc(double max, double min) {
-			double result = max + min;
-		return result;
-	}	
-	 
-	 double max(String[] args){		
-		 double[] doubleArgs = convertStringToDouble(args);
-		 double num1 = doubleArgs[0];
-		 double num2 = doubleArgs[1];
-		 double num3 = doubleArgs[2];
-			double max = num1 > num2 ? num1 : num2;
-			double result = num3 > max ? num3 : max;
-			return result;
-			
-		}
-		
-		double min(String[] args){	
-			double[] doubleArgs = convertStringToDouble(args);
-			double num1 = doubleArgs[0];
-			double num2 = doubleArgs[1];
-			double num3 = doubleArgs[2];
-			double min = num1 < num2 ? num1 : num2;
-			double result = num3 < min ? num3 : min;
-			return result;			
-		}
+	Triangle createTriangle(String[] args){
+		double[] doubleArgs = convertStringToDouble(args); 
+		Triangle triangle = new Triangle(doubleArgs[0],doubleArgs[1]);
+		return triangle;		
+	}
 	
-		 void printResult(double result, String triangleParam) {
-			 System.out.printf("" + triangleParam + " is %.3f \n", result );
+	 void printResult(double result, String triangleParam) {
+		 	System.out.printf("" + triangleParam + " is %.3f \n", result );
 		}
 }

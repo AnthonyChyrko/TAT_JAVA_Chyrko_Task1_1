@@ -1,5 +1,7 @@
 package tasks.task5;
 
+import tasks.messages.Messages;
+
 /**
  * Даны три действительных числа. Возвести в квадрат те их них, значения 
  * которых неотрицательны, и в четвертую степень - отрицательный.
@@ -7,18 +9,12 @@ package tasks.task5;
 public class Task5 {
 	public static void main(String[] args){		
 		Tools tools = new Tools();
-		boolean flag = tools.checkArgs(args);
-		if(flag){
-			for (int i = 0; i < args.length; i++) {
-				double tmp = Double.valueOf(args[i]);
-				if(tools.isPositive(tmp)){
-					System.out.println(Math.pow(tmp, 2));
-				}else{
-					System.out.println(Math.pow(tmp, 4));
-				}
-			}
+		boolean check = tools.checkArgs(args);	
+		if(check){				
+			double[][] result = tools.performCalc(args);
+			tools.printResult(result);
 		}else{
-			System.out.println("Wrong parameters!");
-		}
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);
+		}			
 	}	
 }

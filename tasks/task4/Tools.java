@@ -1,4 +1,4 @@
-package tasks.task6;
+package tasks.task4;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,8 +18,8 @@ class Tools {
 	
 	private boolean checkCountArgs(String[] args){
 		boolean check = true;
-		if(args.length!=3){
-			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
+		if(args.length!=2){
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_2_NUM);			
 			System.exit(1);
 		}
 		return check;
@@ -51,33 +51,28 @@ class Tools {
 		return result;		
 	}
 	
-	 double performCalc(double max, double min) {
-			double result = max + min;
-		return result;
+	 boolean performCalc(String[] args) {
+		double[] doubleArgs = convertStringToDouble(args);
+		double x = doubleArgs[0]; 
+		double y = doubleArgs[1];	
+		boolean flag = false;
+		if((x>=-2 && x<=2)&&(y>=0 && y<=4)){
+				flag = true;
+			}
+		if((x>=-4 && x<=4)&&(y>=-3 && y<=0)){
+				flag = true;
+			}
+		double x0 = 0.0;
+		double y0 = -1.25;
+		double a = 0.25;
+		double b = 0.5;
+		if((Math.pow((x-x0), 2)/Math.pow(a, 2) + Math.pow((y-y0), 2)/Math.pow(b, 2)) < 1){
+			flag = false;
+		}
+		return flag;
 	}	
-	 
-	 double max(String[] args){		
-		 double[] doubleArgs = convertStringToDouble(args);
-		 double num1 = doubleArgs[0];
-		 double num2 = doubleArgs[1];
-		 double num3 = doubleArgs[2];
-			double max = num1 > num2 ? num1 : num2;
-			double result = num3 > max ? num3 : max;
-			return result;
-			
-		}
-		
-		double min(String[] args){	
-			double[] doubleArgs = convertStringToDouble(args);
-			double num1 = doubleArgs[0];
-			double num2 = doubleArgs[1];
-			double num3 = doubleArgs[2];
-			double min = num1 < num2 ? num1 : num2;
-			double result = num3 < min ? num3 : min;
-			return result;			
-		}
 	
-		 void printResult(double result, String triangleParam) {
-			 System.out.printf("" + triangleParam + " is %.3f \n", result );
-		}
+	 void printResult(boolean result) {
+		 	System.out.println(result);
+		}	
 }
