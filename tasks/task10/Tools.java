@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 import tasks.messages.Messages;
 
-class Tools {	
+public class Tools {	
 	
-	boolean checkArgs(String[] args) {		
+	public boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
 			return true;
 		}else{			
@@ -37,18 +37,17 @@ class Tools {
 		return true;		
 	}
 	
-	int convertStrToInt(String str){
+	private int convertStrToInt(String str){
 		int result = 0;
 			try{
 				result = Integer.valueOf(str);				
 			}catch (NumberFormatException nfe) {
-				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
-				System.exit(1);
+				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);					
 			}						
 		return result;
 	}
 		 
-	 void printResult(int[][] matrix) {
+	void printResult(int[][] matrix) {
 			for (int i = 0; i < matrix.length; i++) {
 				for (int j = 0; j < matrix.length; j++) {
 					System.out.print(matrix[i][j] + " ");
@@ -57,7 +56,8 @@ class Tools {
 			}			
 		}
 	
-	int[][] createMatrix(String[] args) {
+	public int[][] createMatrix(String[] args) {
+		checkArgs(args);
 		int n = convertStrToInt(args[0]);
 		int[][] result = new int[n][n];
 		int[] array = createArr(n);
@@ -73,6 +73,7 @@ class Tools {
 		}
 		return result;
 	}
+	
 	private int[] createArr(int n) {
 		int[] result = new int[n];
 		for (int i = 0; i < result.length; i++) {

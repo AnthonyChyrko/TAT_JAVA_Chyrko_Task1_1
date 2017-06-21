@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import tasks.messages.Messages;
 
 
-class Tools {	
+public class Tools {	
 	
 	boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
@@ -17,7 +17,7 @@ class Tools {
 		}		
 	}
 	
-	private boolean checkCountArgs(String[] args){
+	public boolean checkCountArgs(String[] args){
 		boolean check = true;
 		if(args.length!=2){
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_2_NUM);			
@@ -26,7 +26,7 @@ class Tools {
 		return check;
 	}
 	
-	private boolean checkArgsIsNumber(String[] args){		
+	public boolean checkArgsIsNumber(String[] args){		
 		String regexp = "\\d+";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
@@ -52,18 +52,22 @@ class Tools {
 		return result;		
 	}
 	
-	int[] createArray(String[] args) {	
-		int[] intArgs = convertStringToInt(args);
-		int N = intArgs[0];
-		int K = intArgs[1];
-		int[] array = new int[N + 1];
-		Random rand = new Random();
-		for (int i = 0; i < array.length - 1; i++) {
-			array[i] = Math.abs(rand.nextInt(100000));
-			System.out.println(array[i]);
+	public int[] createArray(String[] args) {	
+		if(checkArgs(args)){
+			int[] intArgs = convertStringToInt(args);
+			int N = intArgs[0];
+			int K = intArgs[1];
+			int[] array = new int[N + 1];
+			Random rand = new Random();
+			for (int i = 0; i < array.length - 1; i++) {
+				array[i] = Math.abs(rand.nextInt(100000));
+				System.out.println(array[i]);
+			}
+			array[N] = K;
+			return array;
+		}else {
+			return null;
 		}
-		array[N] = K;
-		return array;
 	}
 
 	int sumEl(int[] array, int K) {

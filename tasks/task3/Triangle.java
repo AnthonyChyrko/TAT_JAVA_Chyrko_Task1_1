@@ -1,21 +1,21 @@
 package tasks.task3;
 
-class Triangle {
+public class Triangle {
+	Tools tools = new Tools();
 	double a;
 	double b;
-	Triangle(){		
-	}
-	Triangle(double a, double b){
+	
+	public Triangle(double a, double b){		
 		this.a = a;
 		this.b = b;
 	}
 	
-	double calcPerim() {		
+	public double calcPerim() {		
 		double p = a + b + Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
 		return p;
 	}
 	
-	double calcSquare() {		
+	public double calcSquare() {		
 		double s = a*b/2;
 		return s;		
 	}

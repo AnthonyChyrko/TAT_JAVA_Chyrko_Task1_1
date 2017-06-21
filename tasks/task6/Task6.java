@@ -15,7 +15,7 @@ public class Task6 {
 			tools.printResult(max, "Max");
 			double min = tools.min(args);
 			tools.printResult(min, "Min");
-			double result = tools.performCalc(max, min);			
+			double result = max + min;			
 			tools.printResult(result, "Summ max and min");
 		}else{
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);

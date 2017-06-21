@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 import tasks.messages.Messages;
 
 
-class Tools {
+public class Tools {
 	
-	boolean checkArgs(String[] args) {		
+	public boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
 			return true;
 		}else{			
@@ -15,16 +15,15 @@ class Tools {
 		}		
 	}
 	
-	private boolean checkCountArgs(String[] args){
+	public boolean checkCountArgs(String[] args){
 		boolean check = true;
 		if(args.length!=1){
-			System.out.println(Messages.WRONG_PARAM+Messages.ENTER_1_NUMBER_OF_4_DIGITS);			
-			System.exit(1);
+			System.out.println(Messages.WRONG_PARAM+Messages.ENTER_1_NUMBER_OF_4_DIGITS);				
 		}
 		return check;
 	}
 	
-	private boolean checkArgsIsNumber(String[] args){		
+	public boolean checkArgsIsNumber(String[] args){		
 		String regexp = "\\d+";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
@@ -37,12 +36,16 @@ class Tools {
 		return true;		
 	}
 
-	void cutAndSumm(String[] args) {
-		char[] tmp = args[0].toCharArray();
-		if((tmp[0]+tmp[1])==(tmp[2]+tmp[3])){
-			System.out.println("true");
-		}else{
+	public void cutAndSumm(String[] args) {
+		if(checkArgs(args)){
+			char[] tmp = args[0].toCharArray();
+			if((tmp[0]+tmp[1])==(tmp[2]+tmp[3])){
+				System.out.println("true");
+			}else{
+				System.out.println("false");
+			}
+		}else {
 			System.out.println("false");
-		}		
+		}	
 	}
 }

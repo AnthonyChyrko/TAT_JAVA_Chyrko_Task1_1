@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 import tasks.messages.Messages;
 
 
-class Tools {	
+public class Tools {	
 	
-	boolean checkArgs(String[] args) {		
+	public boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
 			return true;
 		}else{			

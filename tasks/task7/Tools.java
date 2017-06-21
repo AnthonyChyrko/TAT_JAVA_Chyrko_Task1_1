@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 import tasks.messages.Messages;
 
 
-class Tools {	
+public class Tools {	
 	
-	boolean checkArgs(String[] args) {		
+	public boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
 			return true;
 		}else{			
@@ -16,7 +16,7 @@ class Tools {
 		}		
 	}
 	
-	private boolean checkCountArgs(String[] args){
+	public boolean checkCountArgs(String[] args){
 		boolean check = true;
 		if(args.length!=3){
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
@@ -25,7 +25,7 @@ class Tools {
 		return check;
 	}
 	
-	private boolean checkArgsIsNumber(String[] args){		
+	public boolean checkArgsIsNumber(String[] args){		
 		String regexp = "-?\\d+\\.*\\d*";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
@@ -51,27 +51,31 @@ class Tools {
 		return result;		
 	}
 	
-	double[][] evaluateFunction(String[] args){
-		double[] doubleArgs = convertStringToDouble(args);
-		double a = Math.min(doubleArgs[0], doubleArgs[1]);		
-		double lengthOfLine = Math.abs(doubleArgs[1] - doubleArgs[0]);
-		double h = doubleArgs[2];
-		int countSteps = (int) ((lengthOfLine)/doubleArgs[2] + 1);
-		double[][] result = new double[countSteps][2];	
-		double[] x = new double[countSteps];
-		double[] y = new double[countSteps];		
-		x[0] = a ;
-		
-		for (int i = 1; i < countSteps; i++) {
-			x[i] = x[i-1] + h;
-		}
-		
-		for (int i = 0; i < x.length; i++) {
-			y[i] = Math.pow(Math.sin(x[i]), 2) - Math.cos(2*x[i]);			
-		}
-		
-		result = combineIO(x, y);		
-		return result;		
+	public double[][] evaluateFunction(String[] args){
+		if(checkArgs(args)){
+			double[] doubleArgs = convertStringToDouble(args);
+			double a = Math.min(doubleArgs[0], doubleArgs[1]);		
+			double lengthOfLine = Math.abs(doubleArgs[1] - doubleArgs[0]);
+			double h = doubleArgs[2];
+			int countSteps = (int) ((lengthOfLine)/doubleArgs[2] + 1);
+			double[][] result = new double[countSteps][2];	
+			double[] x = new double[countSteps];
+			double[] y = new double[countSteps];		
+			x[0] = a ;
+			
+			for (int i = 1; i < countSteps; i++) {
+				x[i] = x[i-1] + h;
+			}
+			
+			for (int i = 0; i < x.length; i++) {
+				y[i] = Math.pow(Math.sin(x[i]), 2) - Math.cos(2*x[i]);			
+			}
+			
+			result = combineIO(x, y);		
+			return result;		
+		}else {
+			return null;
+		}	
 	}
 	
 	 private double[][] combineIO(double[] input, double[] output){

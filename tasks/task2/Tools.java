@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 import tasks.messages.Messages;
 
-class Tools {	
+public class Tools {	
 	
-	boolean checkArgs(String[] args) {		
+	public boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
 			return true;
 		}else{			
@@ -15,16 +15,15 @@ class Tools {
 		}		
 	}
 	
-	private boolean checkCountArgs(String[] args){
+	public boolean checkCountArgs(String[] args){
 		boolean check = true;
 		if(args.length!=3){
-			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
-			System.exit(1);
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);				
 		}
 		return check;
 	}
 	
-	private boolean checkArgsIsNumber(String[] args){		
+	public boolean checkArgsIsNumber(String[] args){		
 		String regexp = "-?\\d+\\.*\\d*";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
@@ -37,27 +36,35 @@ class Tools {
 		return true;		
 	}
 	
-	private double[] convertStringToDouble(String[] str){
-		double[] result = new double[str.length];
-		for (int i = 0; i < str.length; i++) {
-			try{
-				result[i] = Double.valueOf(str[i]);				
-			}catch (NumberFormatException nfe) {
-				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
-				System.exit(1);
-			}			
-		}		
-		return result;		
+	public double[] convertStringToDouble(String[] str){
+		if(checkArgs(str)){
+			double[] result = new double[str.length];
+			for (int i = 0; i < str.length; i++) {
+				try{
+					result[i] = Double.valueOf(str[i]);				
+				}catch (NumberFormatException nfe) {
+					System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
+					System.exit(1);
+				}			
+			}		
+			return result;	
+		}else {
+			return null;	
+			}
 	}
 
-	double performCalc(String[] args) {
-		double[] tmp = convertStringToDouble(args);				
-		double a = tmp[0];
-		double b = tmp[1];
-		double c = tmp[2];
-		Double result;
-		result = (b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2*a-Math.pow(a, 3)*c+1/(Math.pow(b, 2));
-		return result;	
+	public double performCalc(String[] args) {
+		if(checkArgs(args)){
+			double[] tmp = convertStringToDouble(args);				
+			double a = tmp[0];
+			double b = tmp[1];
+			double c = tmp[2];
+			Double result;
+			result = (b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2*a-Math.pow(a, 3)*c+1/(Math.pow(b, 2));
+			return result;	
+		}else{
+			return 0;
+		}	
 	}
 
 	 void printResult(double result) {		
