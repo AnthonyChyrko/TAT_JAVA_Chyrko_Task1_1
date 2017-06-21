@@ -1,71 +1,90 @@
 package tasks.task9;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-class Tools {
+import tasks.messages.Messages;
+
+
+class Tools {	
 	
-	boolean checkArgs(String[] args){
-		if(args.length != 3){
-			System.out.println("Enter three numbers!");
+	boolean checkArgs(String[] args) {		
+		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
+			return true;
+		}else{			
 			return false;
 		}		
-		double[] numbers = new double[3];
-		try{
-			for (int i = 0; i < args.length; i++) {
-				numbers[i] = Double.parseDouble(args[i]);
-			}
-		}catch(NumberFormatException nfe){
-			System.out.println("Enter only numbers!");
-			return false;
-		}
-		if(numbers[2] > numbers[0]){
-			System.out.println("The length of the array is less than the position for insertion!");
-			return false;
-		}
-		return true;
-							
 	}
 	
-	 int convertStringToInt(String arg){	
-		int result = Integer.valueOf(arg);	
+	private boolean checkCountArgs(String[] args){
+		boolean check = true;
+		if(args.length!=3){
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_N1_N2_K);			
+			System.exit(1);
+		}
+		return check;
+	}
+	
+	private boolean checkArgsIsNumber(String[] args){		
+		String regexp = "\\d+";
+		Pattern p = Pattern.compile(regexp);
+		Matcher m; 
+		for (int i = 0; i < args.length; i++) {		
+			m = p.matcher(args[i]);
+			if(!m.matches()){				
+				return false;
+			}				
+		}		
+		return true;		
+	}
+	
+	int convertStrToInt(String str){
+		int result = 0;
+			try{
+				result = Integer.valueOf(str);				
+			}catch (NumberFormatException nfe) {
+				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
+				System.exit(1);
+			}						
 		return result;
-}
-
-	int[] createArray(int N) {
-		int[] array = new int[N];
+	}
+		
+	 double[] createArray(int N) {			
+		double[] array = new double[N];
 		Random rand = new Random();
 		for (int i = 0; i < array.length; i++) {
-			array[i] = rand.nextInt(100000);
+			array[i] = Math.abs(rand.nextInt(100000));
 			System.out.println(array[i]);
-		}
+		}		
 		return array;
-	}
+	}		
 
-	int[] combineArrays(int[] array1, int[] array2, int K) {
-		boolean flag = false;
-		int iter = 0;
-		int[] result = new int[array1.length + array2.length];
-		for (int i = 0; i < result.length; i++) {
-			if(i < K || flag){				
-				result[i] = array1[iter];
-				iter++;
-				
-			}else{
-				for (int j = 0; j < array2.length; j++) {
-					result[i] = array2[j];					
-					i++;					
-				}				
-				flag = true;				
-				i = i-1;
+	 double[] combineArrays(double[] array1, double[] array2, int K) {
+			boolean flag = false;
+			int iter = 0;
+			double[] result = new double[array1.length + array2.length];
+			for (int i = 0; i < result.length; i++) {
+				if(i < K || flag){				
+					result[i] = array1[iter];
+					iter++;
+					
+				}else{
+					for (int j = 0; j < array2.length; j++) {
+						result[i] = array2[j];					
+						i++;					
+					}				
+					flag = true;				
+					i = i-1;
+				}
 			}
+			return result;
 		}
-		return result;
+		 
+	void printResult(double[] result) {
+		for (int i = 0; i < result.length; i++) {
+			System.out.printf(" %.3f ",result[i]);
+		}		
 	}
 
-	void printResult(int[] result) {
-		for (int i = 0; i < result.length; i++) {
-			System.out.print(result[i] + "   ");
-		}
-		
-	}
 }

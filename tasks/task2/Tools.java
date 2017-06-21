@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import tasks.messages.Messages;
 
-
 class Tools {	
 	
 	boolean checkArgs(String[] args) {		

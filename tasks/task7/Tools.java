@@ -1,109 +1,67 @@
 package tasks.task7;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-class Tools {
-	private boolean checkArgs(String arg){			
-		double num = 0;				
-			try{					
-				num = Double.parseDouble(arg);				
-			}catch(NumberFormatException nfe){
-				System.out.println("Enter only numbers!");
-				return false;
-			}			
-		return true;
-							
-	}
-		
-	private double convertStringToDouble(String arg){	
-			double result = Double.valueOf(arg);	
-			return result;
-	}
+import tasks.messages.Messages;
 
-	private String enter(){
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		String str = "";
-		try {
-			str = reader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return str;
+
+class Tools {	
+	
+	boolean checkArgs(String[] args) {		
+		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
+			return true;
+		}else{			
+			return false;
+		}		
 	}
 	
-	Double[] menu(){
-		String[] strResult = new String[3];
-		Double[] result = new Double[3];
-		boolean answer = true;		
-		
-		do{
-			System.out.println("Enter A");
-			strResult[0] = enter();
-			if(checkArgs(strResult[0])){
-				result[0] = convertStringToDouble(strResult[0]);
-				answer = false;
-			}else{
-				System.out.println("Do you want to continue? y/n?");
-				String tmp = enter();
-				if(tmp.equals("n")){
-					System.exit(1);					
-				}else while(!tmp.equals("y")){
-					System.out.println("y/n?!!!");
-					tmp = enter();					
-				}
-			}
-		}while(answer);
-		answer = true;
-		do{
-			System.out.println("Enter B");
-			strResult[1] = enter();
-			if(checkArgs(strResult[1])){
-				result[1] = convertStringToDouble(strResult[1]);
-				answer = false;
-			}else{
-				System.out.println("Do you want to continue? y/n?");
-				String tmp = enter();
-				if(tmp.equals("n")){
-					System.exit(2);					
-				}else while(!tmp.equals("y")){
-					System.out.println("y/n?!!!");
-					tmp = enter();					
-				}
-			}
-		}while(answer);	
-		answer = true;
-		do{
-			System.out.println("Enter C");
-			strResult[2] = enter();
-			if(checkArgs(strResult[2])){
-				result[2] = convertStringToDouble(strResult[2]);
-				answer = false;
-			}else{
-				System.out.println("Do you want to continue? y/n?");
-				String tmp = enter();
-				if(tmp.equals("n")){
-					System.exit(3);					
-				}else while(!tmp.equals("y")){
-					System.out.println("y/n?!!!");
-					tmp = enter();					
-				}
-			}
-		}while(answer);
-		
+	private boolean checkCountArgs(String[] args){
+		boolean check = true;
+		if(args.length!=3){
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
+			System.exit(1);
+		}
+		return check;
+	}
+	
+	private boolean checkArgsIsNumber(String[] args){		
+		String regexp = "-?\\d+\\.*\\d*";
+		Pattern p = Pattern.compile(regexp);
+		Matcher m; 
+		for (int i = 0; i < args.length; i++) {		
+			m = p.matcher(args[i]);
+			if(!m.matches()){				
+				return false;
+			}				
+		}		
+		return true;		
+	}
+	
+	private double[] convertStringToDouble(String[] str){
+		double[] result = new double[str.length];
+		for (int i = 0; i < str.length; i++) {
+			try{
+				result[i] = Double.valueOf(str[i]);				
+			}catch (NumberFormatException nfe) {
+				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
+				System.exit(1);
+			}			
+		}		
 		return result;		
 	}
 	
-	double[][] evaluateFunction(Double[] argsArray){
-		double a = Math.min(argsArray[0], argsArray[1]);		
-		double lengthOfLine = Math.abs(argsArray[1] - argsArray[0]);
-		double h = argsArray[2];
-		int countSteps = (int) ((lengthOfLine)/argsArray[2] + 1);
+	double[][] evaluateFunction(String[] args){
+		double[] doubleArgs = convertStringToDouble(args);
+		double a = Math.min(doubleArgs[0], doubleArgs[1]);		
+		double lengthOfLine = Math.abs(doubleArgs[1] - doubleArgs[0]);
+		double h = doubleArgs[2];
+		int countSteps = (int) ((lengthOfLine)/doubleArgs[2] + 1);
 		double[][] result = new double[countSteps][2];	
 		double[] x = new double[countSteps];
 		double[] y = new double[countSteps];		
 		x[0] = a ;
+		
 		for (int i = 1; i < countSteps; i++) {
 			x[i] = x[i-1] + h;
 		}
@@ -112,29 +70,36 @@ class Tools {
 			y[i] = Math.pow(Math.sin(x[i]), 2) - Math.cos(2*x[i]);			
 		}
 		
-		for (int i = 0; i < x.length; i++) {
-			for (int j = 0; j < 2; j++) {
-				if(j==0){
-					result[i][j] = x[i];
-				}else{
-					result[i][j] = y[i];
-				}				 
-			}
-			
-		}
+		result = combineIO(x, y);		
 		return result;		
 	}
 	
-	void printTable(double[][] table){
-		System.out.println("   X      Y   ");
-		for (int i = 0; i < table.length; i++) {
+	 private double[][] combineIO(double[] input, double[] output){
+			double[][] result = new double[input.length][2]; 
+			for (int i = 0; i < input.length; i++) {
+				for (int j = 0; j < 2; j++) {
+					if(j % 2 == 0){
+						result[i][j] = input[i];
+					}else{
+						result[i][j] = output[i];
+					}				
+				}
+			}
+			return result;		 
+		 }
+	 
+	 void printResult(double[][] result) {
+		 System.out.println("   X    Y");
+		 for (int i = 0; i < result.length; i++) {
 			for (int j = 0; j < 2; j++) {
-				System.out.printf("%7f", table[i][j]);
-				System.out.print(" ");
+				if(j % 2 == 0){
+					System.out.printf(" %.3f ",result[i][j]);
+				}else{
+					System.out.printf(" %.3f ",result[i][j]);
+				}				
 			}
 			System.out.println("\n");
-		}
-	}
-	
-	
+		}	 
+	 }	
+
 }

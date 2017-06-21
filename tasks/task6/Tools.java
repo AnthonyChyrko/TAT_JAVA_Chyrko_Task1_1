@@ -63,8 +63,7 @@ class Tools {
 		 double num3 = doubleArgs[2];
 			double max = num1 > num2 ? num1 : num2;
 			double result = num3 > max ? num3 : max;
-			return result;
-			
+			return result;			
 		}
 		
 		double min(String[] args){	

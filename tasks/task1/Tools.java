@@ -6,10 +6,6 @@ import tasks.messages.Messages;
 
 
 class Tools {
-//	Messages mess;
-//	static final String messageWrongParam = "Wrong parameter! ";
-//	static final String messageEnterDigits = "Enter only digits! ";
-//	static final String messageEnter1NumOf4Digits = "Enter only one 4-digit number! ";
 	
 	boolean checkArgs(String[] args) {		
 		if(checkCountArgs(args) && checkArgsIsNumber(args)){			
@@ -40,19 +36,6 @@ class Tools {
 		}
 		return true;		
 	}
-	
-//	private int[] convertStringToInt(String[] str){
-//		int[] result = new int[str.length];
-//		for (int i = 0; i < str.length; i++) {
-//			try{
-//				result[i] = Integer.valueOf(str[i]);				
-//			}catch (NumberFormatException nfe) {
-//				System.out.println(messageWP+messageEOD);			
-//				System.exit(1);
-//			}			
-//		}		
-//		return result;		
-//	}
 
 	void cutAndSumm(String[] args) {
 		char[] tmp = args[0].toCharArray();
