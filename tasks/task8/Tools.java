@@ -21,7 +21,7 @@ public class Tools {
 		boolean check = true;
 		if(args.length!=2){
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_2_NUM);			
-			System.exit(1);
+			return false;
 		}
 		return check;
 	}
@@ -60,7 +60,7 @@ public class Tools {
 			int[] array = new int[N + 1];
 			Random rand = new Random();
 			for (int i = 0; i < array.length - 1; i++) {
-				array[i] = Math.abs(rand.nextInt(100000));
+				array[i] = Math.abs(rand.nextInt(1000000));
 				System.out.println(array[i]);
 			}
 			array[N] = K;
@@ -71,16 +71,41 @@ public class Tools {
 	}
 
 	int sumEl(int[] array, int K) {
-		int summ = 0;
-		for (int i = 0; i < array.length-1; i++) {
-			if(array[i] % K == 0){
-				summ+=array[i];
+		if(checkArray(array)&&checkK(K)){
+			int summ = 0;
+			for (int i = 0; i < array.length-1; i++) {
+				if(array[i] % K == 0){
+					summ+=array[i];
+				}
 			}
+			return summ;		
+		}else{
+			return 0;
 		}
-		return summ;		
 	}
 		 
-	 void printResult(int result, int K) {				 			
+	 private boolean checkK(int k) {
+		 if(k > 2147483647 || k < -2147483648){return false;}
+		 String str = ""+k;
+		     Pattern p = Pattern.compile("-?\\d+");
+		     Matcher m = p.matcher(str);
+		     if(m.matches()){
+		    	 return true;
+		     }		 
+		return false;
+	}
+
+	private boolean checkArray(int[] array) {
+		boolean flag = true;
+		for (int i = 0; i < array.length; i++) {
+			if(!checkK(i)){
+				flag = false;;
+			}
+		}
+		return flag;
+	}
+
+	void printResult(int result, int K) {				 			
 		System.out.println(result + " - The sum of array elements that are multiples of "+ K);			
 	 }	
 

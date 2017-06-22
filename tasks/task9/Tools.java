@@ -21,7 +21,7 @@ public class Tools {
 		boolean check = true;
 		if(args.length!=3){
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_N1_N2_K);			
-			System.exit(1);
+			return false;
 		}
 		return check;
 	}

@@ -20,7 +20,7 @@ public class Tools {
 		boolean check = true;
 		if(args.length!=3){
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
-			System.exit(1);
+			return false;
 		}
 		return check;
 	}
