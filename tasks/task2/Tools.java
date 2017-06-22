@@ -18,7 +18,8 @@ public class Tools {
 	public boolean checkCountArgs(String[] args){
 		boolean check = true;
 		if(args.length!=3){
-			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);				
+			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_3_NUM);			
+			return false;
 		}
 		return check;
 	}
