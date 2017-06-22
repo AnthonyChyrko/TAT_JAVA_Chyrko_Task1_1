@@ -37,16 +37,16 @@ public class Tools {
 		return true;		
 	}
 
-	public void cutAndSumm(String[] args) {
+	public boolean cutAndSumm(String[] args) {
 		if(checkArgs(args)){
 			char[] tmp = args[0].toCharArray();
-			if((tmp[0]+tmp[1])==(tmp[2]+tmp[3])){
-				System.out.println("true");
-			}else{
-				System.out.println("false");
+			if((tmp[0]+tmp[1])==(tmp[2]+tmp[3])){					
+				return true;
+			}else{				
+				return false;
 			}
-		}else {
-			System.out.println("false");
+		}else {			
+			return false;
 		}	
 	}
 }

@@ -10,7 +10,7 @@ public class Task1 {
 		Tools tools = new Tools();
 		boolean check = tools.checkArgs(args);	
 		if(check){
-			tools.cutAndSumm(args);
+			System.out.println(tools.cutAndSumm(args));
 		}else{
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_1_NUMBER_OF_4_DIGITS);
 		}			
