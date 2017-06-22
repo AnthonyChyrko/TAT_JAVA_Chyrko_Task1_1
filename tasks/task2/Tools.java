@@ -61,7 +61,7 @@ public class Tools {
 			double b = tmp[1];
 			double c = tmp[2];
 			Double result;
-			result = (b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2*a-Math.pow(a, 3)*c+1/(Math.pow(b, 2));
+			result = (b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2/a-Math.pow(a, 3)*c+1/(Math.pow(b, 2));
 			return result;	
 		}else{
 			return 0;
