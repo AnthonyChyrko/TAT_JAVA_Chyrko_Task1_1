@@ -85,7 +85,7 @@ public class Tools {
 	}
 		 
 	 private boolean checkK(int k) {
-		 if(k > 2147483647 || k < -2147483648){return false;}
+		 if(k > Integer.MAX_VALUE || k < Integer.MIN_VALUE){return false;}
 		 String str = ""+k;
 		     Pattern p = Pattern.compile("-?\\d+");
 		     Matcher m = p.matcher(str);
