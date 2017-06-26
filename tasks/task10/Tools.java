@@ -25,7 +25,7 @@ public class Tools {
 	}
 	
 	private boolean checkArgsIsNumber(String[] args){		
-		String regexp = "\\d+";
+		String regexp = "\\d{1,2}";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
 		for (int i = 0; i < args.length; i++) {		
@@ -57,7 +57,7 @@ public class Tools {
 		}
 	
 	public int[][] createMatrix(String[] args) {
-		checkArgs(args);
+		if(checkArgs(args)){
 		int n = convertStrToInt(args[0]);
 		int[][] result = new int[n][n];
 		int[] array = createArr(n);
@@ -72,6 +72,9 @@ public class Tools {
 			}
 		}
 		return result;
+		}else {
+			return null;
+		}
 	}
 	
 	private int[] createArr(int n) {

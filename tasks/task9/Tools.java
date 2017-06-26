@@ -44,8 +44,7 @@ public class Tools {
 			try{
 				result = Integer.valueOf(str);				
 			}catch (NumberFormatException nfe) {
-				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
-				System.exit(1);
+				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);					
 			}						
 		return result;
 	}

@@ -1,9 +1,8 @@
 package tasks.task3;
 
-public class Triangle {
-	Tools tools = new Tools();
-	double a;
-	double b;
+public class Triangle {	
+	private double a;
+	private double b;
 	
 	public Triangle(double a, double b){		
 		this.a = a;

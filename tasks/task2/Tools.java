@@ -13,7 +13,7 @@ public class Tools {
 		}else{			
 			return false;
 		}		
-	}
+	}	
 	
 	public boolean checkCountArgs(String[] args){
 		boolean check = true;
@@ -44,8 +44,7 @@ public class Tools {
 				try{
 					result[i] = Double.valueOf(str[i]);				
 				}catch (NumberFormatException nfe) {
-					System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
-					System.exit(1);
+					System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);					
 				}			
 			}		
 			return result;	
@@ -60,8 +59,14 @@ public class Tools {
 			double a = tmp[0];
 			double b = tmp[1];
 			double c = tmp[2];
+			if (a == 0 || b == 0) {
+				 throw new IllegalArgumentException("The parameters 'a' and 'b' should not be zero");	        
+			 }
+			if ((b * b + 4 * a * c) < 0){
+				 throw new ArithmeticException("The expression under the root can not be less than zero");
+			 }
 			Double result;
-			result = (b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2/a-Math.pow(a, 3)*c+1/(Math.pow(b, 2));
+			result = ((b+Math.sqrt(Math.pow(b, 2)+4*a*c))/2/a)-(Math.pow(a, 3)*c)+(Math.pow(b, -2));
 			return result;	
 		}else{
 			return 0;

@@ -27,7 +27,7 @@ public class Tools {
 	}
 	
 	public boolean checkArgsIsNumber(String[] args){		
-		String regexp = "\\d+";
+		String regexp = "\\d{1,7}";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
 		for (int i = 0; i < args.length; i++) {		
@@ -45,8 +45,7 @@ public class Tools {
 			try{
 				result[i] = Integer.valueOf(str[i]);				
 			}catch (NumberFormatException nfe) {
-				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);			
-				System.exit(1);
+				System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);						
 			}			
 		}		
 		return result;		

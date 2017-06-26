@@ -26,7 +26,7 @@ public class Tools {
 	}
 	
 	public boolean checkArgsIsNumber(String[] args){		
-		String regexp = "-?\\d+\\.*\\d*";
+		String regexp = "\\d+\\.*\\d*";
 		Pattern p = Pattern.compile(regexp);
 		Matcher m; 
 		for (int i = 0; i < args.length; i++) {		

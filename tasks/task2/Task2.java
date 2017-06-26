@@ -10,8 +10,12 @@ public class Task2 {
 		Tools tools = new Tools();
 		boolean check = tools.checkArgs(args);	
 		if(check){
-			double result = tools.performCalc(args);
-			tools.printResult(result);
+			try {
+				double result = tools.performCalc(args);
+				tools.printResult(result);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}			
 		}else{
 			System.out.println(Messages.WRONG_PARAM + Messages.ENTER_DIGITS);
 		}					
